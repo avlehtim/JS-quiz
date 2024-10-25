@@ -1,1 +1,668 @@
-<body><h1>Hello world!</h1></body>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The impact of chronic conditions on productivity-adjusted life years (PALYs) in both
+the workplace and household settings in the general adult population in Finland
+</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 2rem;
+      background-color: #f8f9fa;
+    }
+    .question-container {
+      margin-bottom: 2rem;
+    }
+    .btn-option {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center mb-4">The impact of chronic conditions on productivity-adjusted life years (PALYs) in both
+the workplace and household settings in the general adult population in Finland
+</h1>
+    <div id="quiz-container"></div>
+    <button id="next-btn" class="btn btn-primary mt-3" disabled>Seuraava kysymys</button>
+    <div id="result" class="mt-4"></div>
+  </div>
+
+  <script>
+    const questions = 
+[
+  {
+    "question": "What is the primary objective of the study described in the provided source?",
+    "options": [
+      "A) To investigate the relationship between chronic conditions and healthcare costs in Finland",
+      "B) To analyze the impact of specific medications on work productivity among Finnish adults",
+      "C) To quantify the burden of non-communicable conditions on productivity-adjusted life years (PALYs) in Finland",
+      "D) To evaluate the effectiveness of different interventions for managing chronic pain among Finnish workers"
+    ],
+    "answer": "C) To quantify the burden of non-communicable conditions on productivity-adjusted life years (PALYs) in Finland"
+  },
+  {
+    "question": "What does the acronym PALY stand for?",
+    "options": [
+      "A)  Preventable Activity Limitation Years",
+      "B)  Productivity-Adjusted Life Year",
+      "C)  Patient-Assessed Life Years",
+      "D)  Population Average Life Years"
+    ],
+    "answer": "B)  Productivity-Adjusted Life Year"
+  },
+  {
+    "question": "According to the provided source, what is  presenteeism?",
+    "options": [
+      "A)  Reduced efficiency at work due to health issues",
+      "B) Being present at work but not completing any tasks",
+      "C)  The act of attending work while feeling unwell",
+      "D) The opposite of absenteeism"
+    ],
+    "answer": "A)  Reduced efficiency at work due to health issues"
+  },
+  {
+    "question": "What is the definition of absenteeism, as used in the study?",
+    "options": [
+      "A)  The number of days an individual is unable to work due to illness",
+      "B) The frequency with which an individual arrives late to work",
+      "C)  The tendency to take frequent breaks during the workday",
+      "D)  A general lack of motivation or engagement in one's job"
+    ],
+    "answer": "A)  The number of days an individual is unable to work due to illness"
+  },
+  {
+    "question": "Which of the following is NOT a potential consequence of chronic conditions on work productivity, as identified in the source?",
+    "options": [
+      "A)  Increased risk of workplace accidents",
+      "B)  Changes in work participation, such as transitioning from full-time to part-time work",
+      "C)  Decreased quality of life",
+      "D)  Increased risk of disability retirement"
+    ],
+    "answer": "A)  Increased risk of workplace accidents"
+  },
+  {
+    "question": "What is the typical range for a productivity index (PI)?",
+    "options": [
+      "A)  -1 to 1",
+      "B)  0 to 1",
+      "C) 1 to 10",
+      "D) 0 to 100"
+    ],
+    "answer": "B)  0 to 1"
+  },
+  {
+    "question": "What does a PI of 1 represent?",
+    "options": [
+      "A)  Complete absence from work",
+      "B)  Partial productivity",
+      "C) No productivity loss",
+      "D)  Complete productivity loss"
+    ],
+    "answer": "C) No productivity loss"
+  },
+  {
+    "question": "In the context of the study, what is the primary purpose of the Work Productivity and Activity Impairment Questionnaire (WPAI)?",
+    "options": [
+      "A)  To diagnose specific mental health conditions",
+      "B) To assess the severity of physical disabilities",
+      "C)  To measure the impact of health problems on work-related productivity and non-work-related activity impairment",
+      "D)  To evaluate an individual's overall job satisfaction"
+    ],
+    "answer": "C)  To measure the impact of health problems on work-related productivity and non-work-related activity impairment"
+  },
+  {
+    "question": "Over what time period did the WPAI assess productivity and activity impairment?",
+    "options": [
+      "A)  The past 7 days",
+      "B)  The past 30 days",
+      "C)  The past year",
+      "D)  The individual's entire working life"
+    ],
+    "answer": "A)  The past 7 days"
+  },
+  {
+    "question": "How were the WPAI scores, which measured productivity over the past 7 days, extrapolated to represent the entire year?",
+    "options": [
+      "A)  By multiplying the 7-day scores by 52",
+      "B)  By adjusting the scores based on the average number of working days in a year",
+      "C)  By using a statistical model to project the scores over a 12-month period",
+      "D)  The source does not provide specific details on how this extrapolation was performed"
+    ],
+    "answer": "D)  The source does not provide specific details on how this extrapolation was performed"
+  },
+ {
+    "question": "Which of the following is a key finding of the study, as highlighted in the 'Highlights' section?",
+    "options": [
+      "A)  Diabetes has the highest burden of all examined chronic conditions in terms of productivity-adjusted life years.",
+      "B)  Chronic conditions have a negligible impact on within-household productivity.",
+      "C)  The burden of different chronic conditions on work productivity at the Finnish population level was already well-established.",
+      "D)  Depression and other mental health problems have the highest burden of the examined chronic conditions in productivity-adjusted life years at work, within the household, or those combined, especially among the 18–34-year-old population."
+    ],
+    "answer": "D)  Depression and other mental health problems have the highest burden of the examined chronic conditions in productivity-adjusted life years at work, within the household, or those combined, especially among the 18–34-year-old population."
+  },
+  {
+    "question": "What is the main implication of the study's findings for healthcare decision-making or the practice of HEOR?",
+    "options": [
+      "A)  More resources should be allocated to the treatment of musculoskeletal disorders, particularly among older adults.",
+      "B)  Household productivity should be disregarded when assessing the burden of chronic conditions.",
+      "C)  Prevention and treatment efforts for chronic conditions should primarily target individuals aged 35-64.",
+      "D)  More resources should be allocated to the prevention and care of depression and other mental health problems to increase productivity."
+    ],
+    "answer": "D)  More resources should be allocated to the prevention and care of depression and other mental health problems to increase productivity."
+  },
+  {
+    "question": "How does the study address a gap in existing research or evidence?",
+    "options": [
+      "A)  By providing the first-ever estimates of the burden of chronic conditions on productivity in Finland",
+      "B) By focusing solely on the economic costs of chronic conditions, rather than their impact on quality of life",
+      "C)  By examining the burden of chronic conditions exclusively among men",
+      "D)  By utilizing a novel methodology that does not rely on self-reported data"
+    ],
+    "answer": "A)  By providing the first-ever estimates of the burden of chronic conditions on productivity in Finland"
+  },
+  {
+    "question": "What is the estimated annual productivity loss in Finland due to absenteeism alone?",
+    "options": [
+      "A)  €3.4 million",
+      "B) €34 million",
+      "C) €340 million",
+      "D)  €3.4 billion"
+    ],
+    "answer": "D)  €3.4 billion"
+  },
+  {
+    "question": "According to the study, what are the two most common causes of sickness absence in Finland?",
+    "options": [
+      "A)  Cardiovascular disease and respiratory illnesses",
+      "B)  Infectious diseases and cancer",
+      "C) Mental and behavioural disorders and musculoskeletal diseases",
+      "D)  Gastrointestinal disorders and diabetes"
+    ],
+    "answer": "C) Mental and behavioural disorders and musculoskeletal diseases"
+  },
+  {
+    "question": "What percentage of disability retirements in Finland in 2022 were attributed to mental and behavioural disorders and musculoskeletal diseases combined?",
+    "options": [
+      "A)  6.6%",
+      "B) 16.6%",
+      "C)  36.6%",
+      "D)  66%"
+    ],
+    "answer": "D)  66%"
+  },
+  {
+    "question": "Among which demographic group in Finland has there been a particularly sharp increase in depression since 2017?",
+    "options": [
+      "A) Young Finnish female working-age population",
+      "B) Middle-aged Finnish male working-age population",
+      "C) Older Finnish female working-age population",
+      "D) Older Finnish male population"
+    ],
+    "answer": "A) Young Finnish female working-age population"
+  },
+  {
+    "question": "What is the estimated economic burden of major depression in South Korea, in terms of lost GDP, until the affected cohort reaches age 55?",
+    "options": [
+      "A)  USD122 million",
+      "B) USD1.22 billion",
+      "C) USD12.2 billion",
+      "D)  USD122 billion"
+    ],
+    "answer": "D)  USD122 billion"
+  },
+  {
+    "question": "According to a study cited in the source, how many PALYs would be gained in Australia over a 10-year period if all new cases of coronary heart disease were prevented?",
+    "options": [
+      "A)  1,042",
+      "B) 10,420",
+      "C)  104,209",
+      "D)  1,042,090"
+    ],
+    "answer": "C)  104,209"
+  },
+  {
+    "question": "What is the estimated lost productivity due to coronary heart disease in Indonesia, expressed in US dollars?",
+    "options": [
+      "A)  USD3.33 million",
+      "B)  USD33.3 million",
+      "C) USD3.33 billion",
+      "D)  USD33.3 billion"
+    ],
+    "answer": "D)  USD33.3 billion"
+  },
+  {
+    "question": "By what percentage does diabetes reduce work productivity among working-age Australians, according to a study mentioned in the source?",
+    "options": [
+      "A) 2.4%",
+      "B)  11.1%",
+      "C)  24.1%",
+      "D)  41.1%"
+    ],
+    "answer": "B)  11.1%"
+  },
+  {
+    "question": "What is the estimated percentage reduction in work productivity caused by hypertension among working-age Australians?",
+    "options": [
+      "A)  2.4%",
+      "B) 11.1%",
+      "C) 24.1%",
+      "D) 41.1%"
+    ],
+    "answer": "A)  2.4%"
+  },
+  {
+    "question": "Approximately how many PALY losses are attributed to migraine among working-age Australians?",
+    "options": [
+      "A)  3,847",
+      "B) 38,474",
+      "C) 384,740",
+      "D) 3,847,400"
+    ],
+    "answer": "C) 384,740"
+  },
+  {
+    "question": "Why is it important to consider unpaid productivity during leisure time, including productivity at home, when assessing the burden of disease?",
+    "options": [
+      "A)  Because unpaid work has no economic value",
+      "B)  Because unpaid work is not affected by health problems",
+      "C)  Because unpaid work is primarily performed by men",
+      "D)  Because disease also impacts unpaid work, which plays a substantial role in the overall productivity of a country’s economy and is vital for the functioning of households and communities"
+    ],
+    "answer": "D)  Because disease also impacts unpaid work, which plays a substantial role in the overall productivity of a country’s economy and is vital for the functioning of households and communities"
+  },
+  {
+    "question": "What is the estimated daily contribution of women to unpaid work globally, in terms of hours?",
+    "options": [
+      "A)  1.1 million hours",
+      "B)  11 million hours",
+      "C)  1.1 billion hours",
+      "D)  11 billion hours"
+    ],
+    "answer": "D)  11 billion hours"
+  },
+  {
+    "question": "What are the two main aspects of productivity that the study aimed to quantify in Finland?",
+    "options": [
+      "A)  Productivity at work and productivity in educational settings",
+      "B)  Productivity in volunteer work and productivity in social activities",
+      "C)  Productivity at work and productivity within the household",
+      "D) Productivity in childcare and productivity in eldercare"
+    ],
+    "answer": "C)  Productivity at work and productivity within the household"
+  },
+  {
+    "question": "What type of data collection method was used in the study?",
+    "options": [
+      "A)  Analysis of electronic health records",
+      "B)  Telephone interviews",
+      "C)  In-person clinical examinations",
+      "D)  An online survey"
+    ],
+    "answer": "D)  An online survey"
+  },
+  {
+    "question": "What was the target population for the study?",
+    "options": [
+      "A)  Finnish adults aged 18-79 years",
+      "B)  Finnish children aged 0-17 years",
+      "C)  Finnish adults aged 65 years and older",
+      "D)  Finnish adolescents aged 13-17 years"
+    ],
+    "answer": "A)  Finnish adults aged 18-79 years"
+  },
+  {
+    "question": "How many valid responses were included in the final analysis?",
+    "options": [
+      "A)  2187",
+      "B)  2196",
+      "C) 40,000",
+      "D) 4,153,643"
+    ],
+    "answer": "A)  2187"
+  },
+  {
+    "question": "How was representativeness of the study sample ensured?",
+    "options": [
+      "A)  By using a random sampling technique",
+      "B)  By recruiting participants from all major hospitals in Finland",
+      "C)  By oversampling individuals with chronic conditions",
+      "D)  By stratifying the sample structure to correspond to the structure of the Finnish-speaking adult population aged 18–79 years, according to age groups, sex, and hospital districts"
+    ],
+    "answer": "D)  By stratifying the sample structure to correspond to the structure of the Finnish-speaking adult population aged 18–79 years, according to age groups, sex, and hospital districts"
+  },
+  {
+    "question": "What were the two main categories of patient-reported outcome measures included in the survey questionnaire?",
+    "options": [
+      "A)  Measures of physical functioning and measures of cognitive functioning",
+      "B)  Measures of pain intensity and measures of medication use",
+      "C)  Measures of social support and measures of healthcare utilization",
+      "D)  Standardized patient-reported outcome measures such as Finnish translation (version 2.0) of the Work Productivity and Activity Impairment (WPAI) General Health Questionnaire and background questions on respondent’s age, gender, and self-reported chronic conditions"
+    ],
+    "answer": "D)  Standardized patient-reported outcome measures such as Finnish translation (version 2.0) of the Work Productivity and Activity Impairment (WPAI) General Health Questionnaire and background questions on respondent’s age, gender, and self-reported chronic conditions"
+  },
+  {
+    "question": "How were scores for overall work impairment and activity impairment calculated in the WPAI?",
+    "options": [
+      "A)  Based on a single question about overall health status",
+      "B)  Based on clinician ratings of the individual's functional limitations",
+      "C) Based on six questions on employment, hours of work, hours of absenteeism due to health issues or other reasons, hours of presenteeism, and impaired ability to function during free time regarding the previous 7 days",
+      "D)  Based on objective measures of work performance, such as the number of units produced or sales generated"
+    ],
+    "answer": "C) Based on six questions on employment, hours of work, hours of absenteeism due to health issues or other reasons, hours of presenteeism, and impaired ability to function during free time regarding the previous 7 days"
+  },
+  {
+    "question": "What does the overall work impairment score in the WPAI indicate?",
+    "options": [
+      "A)  The degree to which an individual's health problems interfere with their ability to perform their job",
+      "B)  The likelihood of an individual experiencing a workplace injury",
+      "C)  The amount of time an individual spends on work-related activities outside of normal business hours",
+      "D)  The level of stress an individual experiences in their work environment"
+    ],
+    "answer": "A)  The degree to which an individual's health problems interfere with their ability to perform their job"
+  },
+ {
+    "question": "What does the activity impairment score in the WPAI reflect?",
+    "options": [
+      "A) The extent to which an individual’s daily activities are affected by their health",
+      "B) An individual's level of physical fitness",
+      "C)  The amount of time an individual spends engaged in leisure activities",
+      "D)  The quality of an individual's social interactions"
+    ],
+    "answer": "A) The extent to which an individual’s daily activities are affected by their health"
+  },
+  {
+    "question": "On a scale of 0-100%, what does a WPAI score of 0% represent?",
+    "options": [
+      "A)  Total impairment",
+      "B) No impairment",
+      "C)  Moderate impairment",
+      "D)  Severe impairment"
+    ],
+    "answer": "B) No impairment"
+  },
+  {
+    "question": "How is the productivity index (PI) at work calculated?",
+    "options": [
+      "A)  By dividing the WPAI overall work impairment score by 100 and subtracting the result from 1",
+      "B)  By adding the WPAI overall work impairment score and the activity impairment score and dividing the sum by 2",
+      "C)  By multiplying the WPAI overall work impairment score by the individual's age",
+      "D)  By comparing the individual's WPAI score to a normative database of healthy individuals"
+    ],
+    "answer": "A)  By dividing the WPAI overall work impairment score by 100 and subtracting the result from 1"
+  },
+  {
+    "question": "Which respondents provided answers to the WPAI overall work productivity score, and consequently, contributed to the calculation of the PI at work?",
+    "options": [
+      "A) Only employed respondents",
+      "B)  All respondents, regardless of employment status",
+      "C)  Only respondents with chronic conditions",
+      "D) Only respondents who reported experiencing presenteeism"
+    ],
+    "answer": "A) Only employed respondents"
+  },
+  {
+    "question": "How is the PI within the household estimated?",
+    "options": [
+      "A)  Based on the individual's self-reported hours of housework",
+      "B) Based on the WPAI activity impairment score, irrespective of the respondent's working status",
+      "C)  Based on the number of dependents living in the household",
+      "D)  Based on the household's total annual income"
+    ],
+    "answer": "B) Based on the WPAI activity impairment score, irrespective of the respondent's working status"
+  },
+  {
+    "question": "What chronic conditions were respondents asked about in the survey?",
+    "options": [
+      "A)  Only conditions that are typically diagnosed in childhood",
+      "B)  Only conditions that require hospitalization",
+      "C)  Only conditions that are known to be genetically inherited",
+      "D) Respondents were asked if they had one or more long-term conditions from a provided list which included,  asthma or chronic obstructive pulmonary disease (COPD), cardiovascular diseases, depression or other mental health problems, diabetes, gastrointestinal disease, hypothyroidism or other thyroid disease, migraine or other chronic headache, and musculoskeletal disease"
+    ],
+    "answer": "D) Respondents were asked if they had one or more long-term conditions from a provided list which included,  asthma or chronic obstructive pulmonary disease (COPD), cardiovascular diseases, depression or other mental health problems, diabetes, gastrointestinal disease, hypothyroidism or other thyroid disease, migraine or other chronic headache, and musculoskeletal disease"
+  },
+  {
+    "question": "How were the chronic conditions categorized in the study?",
+    "options": [
+      "A)  By their underlying cause, such as genetic or environmental factors",
+      "B) By their severity, ranging from mild to life-threatening",
+      "C)  By the affected organ system, such as respiratory or cardiovascular",
+      "D)  By their impact on life expectancy"
+    ],
+    "answer": "C)  By the affected organ system, such as respiratory or cardiovascular"
+  },
+  {
+    "question": "What data source was used to obtain information on the Finnish population by age and sex?",
+    "options": [
+      "A)  The Finnish National Census",
+      "B)  The StatFin database maintained by Statistics Finland",
+      "C)  The European Union's Eurostat database",
+      "D)  The World Health Organization's Global Health Observatory"
+    ],
+    "answer": "B)  The StatFin database maintained by Statistics Finland"
+  },
+  {
+    "question": "What statistical method was used to estimate age- and sex-specific prevalence of the eight chronic conditions?",
+    "options": [
+      "A)  Chi-square test",
+      "B)  Analysis of variance (ANOVA)",
+      "C)  Logistic regression",
+      "D)  T-test"
+    ],
+    "answer": "C)  Logistic regression"
+  },
+  {
+    "question": "What statistical method was employed to predict age- and sex-specific PIs at work, within the household, and in combination?",
+    "options": [
+      "A)  Linear regression",
+      "B)  Poisson regression",
+      "C)  Zero- and one-inflated beta (ZOIB) regression",
+      "D)  Cox proportional hazards regression"
+    ],
+    "answer": "C)  Zero- and one-inflated beta (ZOIB) regression"
+  },
+  {
+    "question": "What is the main advantage of using ZOIB regression over other regression methods in this study?",
+    "options": [
+      "A)  It is less computationally intensive",
+      "B)  It does not require any assumptions about the distribution of the data",
+      "C)  It is particularly suitable for data that contains over- or under-represented zeros or ones",
+      "D)  It can handle missing data more effectively"
+    ],
+    "answer": "C)  It is particularly suitable for data that contains over- or under-represented zeros or ones"
+  },
+  {
+    "question": "What value was used to confirm convergence of the ZOIB model?",
+    "options": [
+      "A)  P-value",
+      "B)  R-squared value",
+      "C)  Rhat value",
+      "D)  Akaike information criterion (AIC)"
+    ],
+    "answer": "C)  Rhat value"
+  },
+  {
+    "question": "What does an Rhat value of 1 indicate in the context of the ZOIB model?",
+    "options": [
+      "A)  Model overfitting",
+      "B)  Lack of model convergence",
+      "C)  Model convergence",
+      "D)  Statistical significance"
+    ],
+    "answer": "C)  Model convergence"
+  },
+  {
+    "question": "What were the predictors included in the ZOIB regression models?",
+    "options": [
+      "A)  Age, sex, and education level",
+      "B)  Sex, age group, and income",
+      "C)  Sex and age group",
+      "D)  Age, sex, and chronic condition status"
+    ],
+    "answer": "C)  Sex and age group"
+  },
+  {
+    "question": "What were the three response variables used in the ZOIB regression models?",
+    "options": [
+      "A)  PI at work, PI within the household, and the weighted average PI",
+      "B)  Number of days of work missed, severity of symptoms, and healthcare costs",
+      "C)  Quality of life, life expectancy, and disability status",
+      "D)  Job satisfaction, work-life balance, and social support"
+    ],
+    "answer": "A)  PI at work, PI within the household, and the weighted average PI"
+  },
+  {
+    "question": "How was the relative reduction in PIs at work, within the household, and in the weighted average calculated?",
+    "options": [
+      "A)  By subtracting the PI for individuals with the condition from the PI for individuals without the condition and dividing the result by the PI for individuals without the condition",
+      "B)  By dividing the PI for individuals with the condition by the PI for individuals without the condition",
+      "C)  By adding the PI for individuals with the condition and the PI for individuals without the condition and dividing the sum by 2",
+      "D)  By using a complex statistical model that accounts for multiple confounding factors"
+    ],
+    "answer": "A)  By subtracting the PI for individuals with the condition from the PI for individuals without the condition and dividing the result by the PI for individuals without the condition"
+  },
+  {
+    "question": "What equation was used to determine the population-level yearly total loss of PALY at work?",
+    "options": [
+      "A)  PALY loss = [1 – (p * A + (1 - p) * B) / B] * N",
+      "B) PALY loss = (A - B) / A * 100",
+      "C)  PALY loss = (PI at work + PI within the household) / 2",
+      "D)  PALY loss = 1 - WPAI overall work impairment score / 100"
+    ],
+    "answer": "A)  PALY loss = [1 – (p * A + (1 - p) * B) / B] * N"
+  },
+  {
+    "question": "In the equation for calculating PALY loss, what does 'p' represent?",
+    "options": [
+      "A)  Productivity index (PI)",
+      "B)  Population size",
+      "C)  Prevalence of condition",
+      "D)  Proportion of individuals employed"
+    ],
+    "answer": "C)  Prevalence of condition"
+  },
+  {
+    "question": "What does 'N' stand for in the PALY loss equation?",
+    "options": [
+      "A)  Number of individuals in the population",
+      "B)  Average age of the population",
+      "C)  Number of years lived with the condition",
+      "D)  Net economic loss due to the condition"
+    ],
+    "answer": "A)  Number of individuals in the population"
+  },
+  {
+    "question": "What programming language and package were used for statistical analysis and zero- and one-inflated beta regression modeling?",
+    "options": [
+      "A)  Python with the 'scikit-learn' package",
+      "B)  SAS with the 'PROC GENMOD' procedure",
+      "C)  R with the 'brms' package",
+      "D)  SPSS with the 'REGRESSION' command"
+    ],
+    "answer": "C)  R with the 'brms' package"
+  },
+  {
+    "question": "What was the percentage of women in the survey data?",
+    "options": [
+      "A) 41.6%",
+      "B)  51.8%",
+      "C)  54.6%",
+      "D) 55.6%"
+    ],
+    "answer": "C)  54.6%"
+  },
+  {
+    "question": "What was the mean age of respondents in the survey data?",
+    "options": [
+      "A)  47.0 years",
+      "B) 51.8 years",
+      "C)  54.4 years",
+      "D)  79 years"
+    ],
+    "answer": "B) 51.8 years"
+  }
+];
+
+    let currentQuestionIndex = 0;
+    let shuffledQuestions = [];
+    let score = 0;
+
+    const quizContainer = document.getElementById('quiz-container');
+    const nextBtn = document.getElementById('next-btn');
+    const resultContainer = document.getElementById('result');
+
+    function shuffleQuestions() {
+      shuffledQuestions = questions
+        .map(question => ({ ...question }))
+        .sort(() => Math.random() - 0.5);
+    }
+
+    function loadQuestion() {
+      quizContainer.innerHTML = ''; // Clear previous question
+      nextBtn.disabled = true; // Disable the next button initially
+
+      if (currentQuestionIndex >= shuffledQuestions.length) {
+        displayResult();
+        return;
+      }
+
+      const question = shuffledQuestions[currentQuestionIndex];
+      const questionTitle = document.createElement('h5');
+      questionTitle.innerText = `${currentQuestionIndex + 1}. ${question.question}`;
+      quizContainer.appendChild(questionTitle);
+
+      question.options.forEach((option, optionIndex) => {
+        const optionBtn = document.createElement('button');
+        optionBtn.classList.add('btn', 'btn-outline-primary', 'btn-option');
+        optionBtn.innerText = option;
+        optionBtn.addEventListener('click', () => checkAnswer(optionBtn, option));
+        quizContainer.appendChild(optionBtn);
+      });
+    }
+
+    function checkAnswer(button, selectedOption) {
+      const question = shuffledQuestions[currentQuestionIndex];
+      const correctAnswer = question.answer;
+      
+      // Disable all buttons after selecting an answer
+      document.querySelectorAll('.btn-option').forEach(btn => {
+        btn.disabled = true;
+        if (btn.innerText.startsWith(correctAnswer)) {
+          btn.classList.replace('btn-outline-primary', 'btn-success'); // Highlight correct answer in green
+        }
+      });
+
+      if (selectedOption.startsWith(correctAnswer)) {
+        score += 1;
+      } else {
+        button.classList.replace('btn-outline-primary', 'btn-danger'); // Wrong answer in red
+      }
+
+      // Enable the next button
+      nextBtn.disabled = false;
+    }
+
+    function displayResult() {
+      quizContainer.innerHTML = '';
+      nextBtn.style.display = 'none'; // Hide the next button
+      resultContainer.innerHTML = `<h4>Pisteet: ${score}/${shuffledQuestions.length}</h4>`;
+    }
+
+    nextBtn.addEventListener('click', function() {
+      currentQuestionIndex++;
+      loadQuestion();
+    });
+
+    // Initialize quiz
+    shuffleQuestions();
+    loadQuestion();
+  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+</body>
+</html>
