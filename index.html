@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The impact of chronic conditions on productivity-adjusted life years (PALYs) in both
-the workplace and household settings in the general adult population in Finland
-</title>
+the workplace and household settings in the general adult population in Finland -
+Quiz</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
   <style>
     body {
@@ -18,23 +18,48 @@ the workplace and household settings in the general adult population in Finland
     .btn-option {
       margin-bottom: 10px;
       width: 100%;
+      text-align: left;
+    }
+    .score-display {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .feedback.correct {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .feedback.incorrect {
+      background-color: #f8d7da;
+      color: #721c24;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h1 class="text-center mb-4">The impact of chronic conditions on productivity-adjusted life years (PALYs) in both
 the workplace and household settings in the general adult population in Finland
-</h1>
+- Quiz</h1>
     <div id="quiz-container"></div>
     <button id="next-btn" class="btn btn-primary mt-3" disabled>Seuraava kysymys</button>
     <div id="result" class="mt-4"></div>
+    <div id="score" class="score-display">Pisteet: 0/0</div>
+    <div id="feedback" class="feedback"></div>
   </div>
 
   <script>
-    const questions = 
-[
+    const questions = [
+      [
   {
     "question": "What is the primary objective of the study described in the provided source?",
     "options": [
@@ -588,68 +613,87 @@ the workplace and household settings in the general adult population in Finland
 ];
 
     let currentQuestionIndex = 0;
-    let shuffledQuestions = [];
     let score = 0;
+    let totalAnswered = 0;
 
     const quizContainer = document.getElementById('quiz-container');
     const nextBtn = document.getElementById('next-btn');
     const resultContainer = document.getElementById('result');
-
-    function shuffleQuestions() {
-      shuffledQuestions = questions
-        .map(question => ({ ...question }))
-        .sort(() => Math.random() - 0.5);
-    }
+    const scoreDisplay = document.getElementById('score');
+    const feedbackContainer = document.getElementById('feedback');
 
     function loadQuestion() {
-      quizContainer.innerHTML = ''; // Clear previous question
-      nextBtn.disabled = true; // Disable the next button initially
+      quizContainer.innerHTML = '';
+      nextBtn.disabled = true;
+      feedbackContainer.innerHTML = '';
+      feedbackContainer.className = 'feedback';
 
-      if (currentQuestionIndex >= shuffledQuestions.length) {
+      if (currentQuestionIndex >= questions.length) {
         displayResult();
         return;
       }
 
-      const question = shuffledQuestions[currentQuestionIndex];
+      const question = questions[currentQuestionIndex];
       const questionTitle = document.createElement('h5');
       questionTitle.innerText = `${currentQuestionIndex + 1}. ${question.question}`;
       quizContainer.appendChild(questionTitle);
 
-      question.options.forEach((option, optionIndex) => {
+      question.options.forEach((option) => {
         const optionBtn = document.createElement('button');
         optionBtn.classList.add('btn', 'btn-outline-primary', 'btn-option');
         optionBtn.innerText = option;
         optionBtn.addEventListener('click', () => checkAnswer(optionBtn, option));
         quizContainer.appendChild(optionBtn);
       });
+
+      updateScore();
     }
 
     function checkAnswer(button, selectedOption) {
-      const question = shuffledQuestions[currentQuestionIndex];
+      const question = questions[currentQuestionIndex];
       const correctAnswer = question.answer;
+      totalAnswered++;
       
-      // Disable all buttons after selecting an answer
+      // Disable all buttons
       document.querySelectorAll('.btn-option').forEach(btn => {
         btn.disabled = true;
-        if (btn.innerText.startsWith(correctAnswer)) {
-          btn.classList.replace('btn-outline-primary', 'btn-success'); // Highlight correct answer in green
+        if (btn.innerText === correctAnswer) {
+          btn.classList.remove('btn-outline-primary');
+          btn.classList.add('btn-success');
         }
       });
 
-      if (selectedOption.startsWith(correctAnswer)) {
+      if (selectedOption === correctAnswer) {
         score += 1;
+        button.classList.remove('btn-outline-primary');
+        button.classList.add('btn-success');
+        feedbackContainer.innerHTML = 'Oikea vastaus!';
+        feedbackContainer.className = 'feedback correct';
       } else {
-        button.classList.replace('btn-outline-primary', 'btn-danger'); // Wrong answer in red
+        button.classList.remove('btn-outline-primary');
+        button.classList.add('btn-danger');
+        feedbackContainer.innerHTML = 'Väärä vastaus!';
+        feedbackContainer.className = 'feedback incorrect';
       }
 
-      // Enable the next button
+      updateScore();
       nextBtn.disabled = false;
+    }
+
+    function updateScore() {
+      scoreDisplay.innerHTML = `Pisteet: ${score}/${totalAnswered}`;
     }
 
     function displayResult() {
       quizContainer.innerHTML = '';
-      nextBtn.style.display = 'none'; // Hide the next button
-      resultContainer.innerHTML = `<h4>Pisteet: ${score}/${shuffledQuestions.length}</h4>`;
+      nextBtn.style.display = 'none';
+      feedbackContainer.innerHTML = '';
+      resultContainer.innerHTML = `
+        <div class="alert alert-info">
+          <h4>Testi suoritettu!</h4>
+          <p>Lopulliset pisteet: ${score}/${questions.length}</p>
+        </div>
+      `;
     }
 
     nextBtn.addEventListener('click', function() {
@@ -658,11 +702,10 @@ the workplace and household settings in the general adult population in Finland
     });
 
     // Initialize quiz
-    shuffleQuestions();
     loadQuestion();
   </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
 </body>
 </html>
